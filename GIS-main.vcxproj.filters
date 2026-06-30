@@ -31,32 +31,32 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GIS\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GIS\mainwindow.cpp">
+    <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GIS\mapwidget.cpp">
+    <ClCompile Include="mapwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GIS\backend.cpp">
+    <ClCompile Include="backend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="..\GIS\backend.h">
+    <QtMoc Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\GIS\mainwindow.h">
+    <QtMoc Include="mapwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\GIS\mapwidget.h">
+    <QtMoc Include="backend.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\GIS\vector3d.h">
+    <ClInclude Include="vector3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -96,22 +96,20 @@
     <QtUic Include="GISmain.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GIS\backend.cpp" />
-    <ClCompile Include="..\GIS\main.cpp" />
-    <ClCompile Include="..\GIS\mainwindow.cpp" />
-    <ClCompile Include="..\GIS\mapwidget.cpp" />
+    <ClCompile Include="backend.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="mapwidget.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="..\GIS\backend.h" />
+    <QtMoc Include="mainwindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="..\GIS\mainwindow.h" />
+    <QtMoc Include="mapwidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="..\GIS\mapwidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\GIS\vector3d.h" />
+    <QtMoc Include="backend.h" />
+    <ClInclude Include="vector3d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

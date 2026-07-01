@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include "backend.h"
 #include "mapwidget.h"
+#include "viewer3d.h"
 
 class MainWindow : public QMainWindow
 {
@@ -21,6 +22,7 @@ private slots:
 private:
     Backend m_backend;
     MapWidget* m_mapWidget;
+    Viewer3D* m_viewer3D;
 
     QLineEdit* m_editX;
     QLineEdit* m_editY;

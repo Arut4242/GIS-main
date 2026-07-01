@@ -4,6 +4,7 @@
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QGroupBox>
+#include <QTabWidget>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -11,21 +12,21 @@ MainWindow::MainWindow(QWidget* parent)
     resize(1024, 768);
     setWindowTitle("ГИС: Интерсекция Сферы и WGS-84");
 
-    QWidget* centralWidget = new QWidget(this);
+    QWidget* centralWidget = new QWidget();
     setCentralWidget(centralWidget);
 
     QHBoxLayout* mainLayout = new QHBoxLayout(centralWidget);
 
     // Левая боковая панель настроек
-    QGroupBox* controlGroup = new QGroupBox("Панели управления", this);
+    QGroupBox* controlGroup = new QGroupBox("Панели управления", centralWidget);
     controlGroup->setFixedWidth(400);
     QVBoxLayout* controlLayout = new QVBoxLayout(controlGroup);
 
     QFormLayout* formLayout = new QFormLayout();
 
-    m_editX = new QLineEdit("0", this);
-    m_editY = new QLineEdit("0", this);
-    m_editZ = new QLineEdit("6378137", this);
+    m_editX = new QLineEdit("0", centralWidget);
+    m_editY = new QLineEdit("0", centralWidget);
+    m_editZ = new QLineEdit("6378137", centralWidget);
 
     QHBoxLayout* ecefLayout = new QHBoxLayout();
     ecefLayout->addWidget(m_editX);
@@ -33,32 +34,38 @@ MainWindow::MainWindow(QWidget* parent)
     ecefLayout->addWidget(m_editZ);
     formLayout->addRow("Центр сферы (ECEF XYZ, м):", ecefLayout);
 
-    m_editRadius = new QLineEdit("500000", this);
+    m_editRadius = new QLineEdit("500000", centralWidget);
     formLayout->addRow("Радиус (м):", m_editRadius);
 
-    m_spinStep = new QSpinBox(this);
+    m_spinStep = new QSpinBox(centralWidget);
     m_spinStep->setRange(100, 1000000);
-    m_spinStep->setSingleStep(1000);
+    m_spinStep->setSingleStep(5000);
     m_spinStep->setValue(10000);
     formLayout->addRow("Шаг дискретизации (м):", m_spinStep);
 
     controlLayout->addLayout(formLayout);
 
-    QPushButton* btnCalculate = new QPushButton("Рассчитать", this);
+    QPushButton* btnCalculate = new QPushButton("Рассчитать", centralWidget);
     btnCalculate->setStyleSheet("background-color: #0078D7; color: white; font-weight: bold; padding: 6px;");
     controlLayout->addWidget(btnCalculate);
 
-    m_labelError = new QLabel(this);
+    m_labelError = new QLabel(centralWidget);
     m_labelError->setStyleSheet("color: red;");
     m_labelError->setWordWrap(true);
     controlLayout->addWidget(m_labelError);
     controlLayout->addStretch();
 
     // Правая область с интерактивной картой
-    m_mapWidget = new MapWidget(this);
+    QTabWidget* tabWidget = new QTabWidget(centralWidget);
+
+    m_mapWidget = new MapWidget(tabWidget);
+    m_viewer3D = new Viewer3D(tabWidget);
+
+    tabWidget->addTab(m_mapWidget, "Плоская 2D Карта");
+    tabWidget->addTab(m_viewer3D, "Интерактивная 3D Модель");
 
     mainLayout->addWidget(controlGroup);
-    mainLayout->addWidget(m_mapWidget, 1);
+    mainLayout->addWidget(tabWidget, 1);
 
     connect(btnCalculate, &QPushButton::clicked, this, &MainWindow::onCalculateClicked);
 }
@@ -81,4 +88,5 @@ void MainWindow::onCalculateClicked()
     }
 
     m_mapWidget->setPath(points);
+    m_viewer3D->setData(points, cx, cy, cz, radius);
 }

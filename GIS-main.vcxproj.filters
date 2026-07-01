@@ -43,6 +43,9 @@
     <ClCompile Include="backend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="viewer3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -52,6 +55,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="backend.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="viewer3d.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
